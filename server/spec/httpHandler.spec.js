@@ -76,6 +76,7 @@ describe('server responses', () => {
   it('should respond DOWN for DOWN swim command', (done) => {
     // set up
     let {req, res} = server.mock('/', 'GET', 'down');
+    console.log('REQ: ', req);
     // run
     httpHandler.router(req, res);
     // assert

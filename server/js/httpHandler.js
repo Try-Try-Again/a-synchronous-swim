@@ -18,18 +18,7 @@ module.exports.router = (req, res, next = () => { }) => {
   res.writeHead(200, headers);
   // res.end(res._data.toString());
   //res.end(req.method === 'GET' ? 'left' : '' );
-  res.end(req.method === 'GET' ? function() {
-    var num = Math.random()
-    if (num < .25) {
-      return 'up';
-    } else if (num < .5) {
-      return 'right';
-    } else if (num < .75) {
-      return 'down';
-    } else {
-      return 'left';
-    }
-  }() : '');
+  res.end(req.method === 'GET' ? req._postData : '');
   //res.end('left');
   //res.end(left? left : ;)
   next(); // invoke next() at the end of a request to help with testing!
