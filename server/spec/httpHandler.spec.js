@@ -4,6 +4,10 @@ const path = require('path');
 const expect = require('chai').expect;
 const server = require('./mockServer');
 
+// const describe = require('mocha').describe;
+//https://jestjs.io/docs/en/api#describename-fn
+
+
 const httpHandler = require('../js/httpHandler');
 
 
@@ -17,12 +21,24 @@ describe('server responses', () => {
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
     expect(res._data.toString()).to.be.empty;
-
     done();
   });
 
   it('should respond to a GET request for a swim command', (done) => {
-    // write your test here
+    // Write a test to verify the server responds with a random swim command to a GET request.
+    // set up
+    let {req, res} = server.mock('/', 'GET', 'left');
+    console.log('REQUEST: ', req);
+    console.log('BEFORE: ', res);
+
+    // run
+    httpHandler.router(req, res);
+    console.log('AFTER: ', res);
+    console.log('BUFFER: ', res._data.toString());
+
+    // assert
+    expect(res._data.toString()).to.not.equal('');
+
     done();
   });
 

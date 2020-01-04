@@ -1,0 +1,8 @@
+ls: unrecognized option '--asdf'
+Try 'ls --help' for more information.
+ls: unrecognized option '--asdf'
+Try 'ls --help' for more information.
+ls: unrecognized option '--asdf'
+Try 'ls --help' for more information.
+ls: unrecognized option '--asdf'
+Try 'ls --help' for more information.
