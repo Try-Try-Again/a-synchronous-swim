@@ -42,6 +42,47 @@ describe('server responses', () => {
     done();
   });
 
+
+  it('should respond LEFT for LEFT swim command', (done) => {
+    // set up
+    let {req, res} = server.mock('/', 'GET', 'left');
+    // run
+    httpHandler.router(req, res);
+    // assert
+    expect(res._data.toString()).to.equal('left');
+    done();
+  });
+
+  it('should respond RIGHT for RIGHT swim command', (done) => {
+    // set up
+    let {req, res} = server.mock('/', 'GET', 'right');
+    // run
+    httpHandler.router(req, res);
+    // assert
+    expect(res._data.toString()).to.equal('right');
+    done();
+  });
+
+  it('should respond UP for UP swim command', (done) => {
+    // set up
+    let {req, res} = server.mock('/', 'GET', 'up');
+    // run
+    httpHandler.router(req, res);
+    // assert
+    expect(res._data.toString()).to.equal('up');
+    done();
+  });
+
+  it('should respond DOWN for DOWN swim command', (done) => {
+    // set up
+    let {req, res} = server.mock('/', 'GET', 'down');
+    // run
+    httpHandler.router(req, res);
+    // assert
+    expect(res._data.toString()).to.equal('down');
+    done();
+  });
+
   xit('should respond with 404 to a GET request for a missing background image', (done) => {
     httpHandler.backgroundImageFile = path.join('.', 'spec', 'missing.jpg');
     let {req, res} = server.mock('FILL_ME_IN', 'GET');
