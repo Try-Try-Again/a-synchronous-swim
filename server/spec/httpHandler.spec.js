@@ -24,65 +24,67 @@ describe('server responses', () => {
     done();
   });
 
-  it('should respond to a GET request for a swim command', (done) => {
-    // Write a test to verify the server responds with a random swim command to a GET request.
+  // new test for GET request with empty array
+
+  it('should respond to a left GET request with left', (done) => {
     // set up
-    let {req, res} = server.mock('/', 'GET', 'left');
-    console.log('REQUEST: ', req);
-    console.log('BEFORE: ', res);
+    var post = server.mock('/', 'POST', 'left');
+    var get = server.mock('/', 'GET');
 
     // run
-    httpHandler.router(req, res);
-    console.log('AFTER: ', res);
-    console.log('BUFFER: ', res._data.toString());
-
+    httpHandler.router(post.req, post.res);
+    httpHandler.router(get.req, get.res);
     // assert
-    expect(res._data.toString()).to.not.equal('');
+    expect(get.res._data.toString()).to.equal('left');
+
+    done();
+  });
+
+  it('should respond to a right GET request with right', (done) => {
+    // set up
+    var post = server.mock('/', 'POST', 'right');
+    var get = server.mock('/', 'GET');
+
+    // run
+    httpHandler.router(post.req, post.res);
+    httpHandler.router(get.req, get.res);
+    // assert
+    expect(get.res._data.toString()).to.equal('right');
+
+    done();
+  });
+
+  it('should respond to a up GET request with right', (done) => {
+    // set up
+    var post = server.mock('/', 'POST', 'up');
+    var get = server.mock('/', 'GET');
+
+    // run
+    httpHandler.router(post.req, post.res);
+    httpHandler.router(get.req, get.res);
+    // assert
+    expect(get.res._data.toString()).to.equal('up');
+
+    done();
+  });
+
+  it('should respond to a down GET request with down', (done) => {
+    // set up
+    var post = server.mock('/', 'POST', 'down');
+    var get = server.mock('/', 'GET');
+
+    // run
+    httpHandler.router(post.req, post.res);
+    httpHandler.router(get.req, get.res);
+    // assert
+    expect(get.res._data.toString()).to.equal('down');
 
     done();
   });
 
 
-  it('should respond LEFT for LEFT swim command', (done) => {
-    // set up
-    let {req, res} = server.mock('/', 'GET', 'left');
-    // run
-    httpHandler.router(req, res);
-    // assert
-    expect(res._data.toString()).to.equal('left');
-    done();
-  });
 
-  it('should respond RIGHT for RIGHT swim command', (done) => {
-    // set up
-    let {req, res} = server.mock('/', 'GET', 'right');
-    // run
-    httpHandler.router(req, res);
-    // assert
-    expect(res._data.toString()).to.equal('right');
-    done();
-  });
 
-  it('should respond UP for UP swim command', (done) => {
-    // set up
-    let {req, res} = server.mock('/', 'GET', 'up');
-    // run
-    httpHandler.router(req, res);
-    // assert
-    expect(res._data.toString()).to.equal('up');
-    done();
-  });
-
-  it('should respond DOWN for DOWN swim command', (done) => {
-    // set up
-    let {req, res} = server.mock('/', 'GET', 'down');
-    console.log('REQ: ', req);
-    // run
-    httpHandler.router(req, res);
-    // assert
-    expect(res._data.toString()).to.equal('down');
-    done();
-  });
 
   xit('should respond with 404 to a GET request for a missing background image', (done) => {
     httpHandler.backgroundImageFile = path.join('.', 'spec', 'missing.jpg');
